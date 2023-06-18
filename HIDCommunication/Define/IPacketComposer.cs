@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace HIDCommunication.Define
 {
-    internal class IPacketComposer
+    /// <summary>
+    /// Packet Processing Layer
+    /// This layer is responsible for composing and decomposing packets.
+    /// </summary>
+    public interface IPacketComposer
     {
+        byte[] Compose(byte[] data);
+        byte[] Decompose(byte[] packet);
     }
 }
