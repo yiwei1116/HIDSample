@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIDCommunication
+namespace HIDCommunication.Define
 {
-    internal class ICommandLayer
+    public interface ICommandLayer
     {
+        Task<byte[]> I2CWrite(int slaveAddress, int address, byte data);
+        Task<byte[]> I2CRead(int slaveAddress, int address);
     }
 }

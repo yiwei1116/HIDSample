@@ -35,14 +35,14 @@ namespace ConsoleApp1
         static async Task Main()
         {
             DeviceManager deviceManager = new DeviceManager();
-            deviceManager.Connect(vendorId, productId);
+            deviceManager.Connect(0x1234, 0x4567);
 
             CommandExecutor commandExecutor = new CommandExecutor(deviceManager);
 
             // I2C Write
-            int slaveAddress = /* ... */;
-            int address = /* ... */;
-            byte data = /* ... */;
+            int slaveAddress =0x67 ;
+            int address = 0x11;
+            byte data = 0x22;
             var response = await commandExecutor.I2CWrite(slaveAddress, address, data);
 
             // I2C Read

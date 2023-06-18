@@ -44,7 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandExecutor.cs" />
+    <Compile Include="Define\IPacketComposer.cs" />
+    <Compile Include="DeviceManager.cs" />
     <Compile Include="HIDCommunicator.cs" />
+    <Compile Include="I2CReadPacketComposer.cs" />
+    <Compile Include="I2CWritePacketComposer.cs" />
+    <Compile Include="Define\ICommandLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

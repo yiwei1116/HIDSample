@@ -1,16 +1,22 @@
-﻿using System;
+﻿using HidLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HIDCommunication
 {
+    /// <summary>
+    /// Data Layer
+    /// This layer is responsible for handling the low-level communication with the HID device.
+    /// </summary>
     public class HIDCommunicator
     {
         private HidDevice _device;
         private TaskCompletionSource<byte[]> _tcs;
-        // Initialize variables for the device connection
 
         public void Connect(int vendorId, int productId)
         {
@@ -35,11 +41,6 @@ namespace HIDCommunication
             }
         }
 
-        public async Task<byte[]> WriteDataAndWaitForResponseAsync(byte[] data)
-        {
-            // Logic to write data to the HID device and wait for a response
-            return response;
-        }
         private void OnReportReceived(HidReport report)
         {
             // Trigger the completion source with the data received
@@ -64,12 +65,32 @@ namespace HIDCommunication
         }
         private void DeviceAttachedHandler()
         {
-            // Logic for when the device is reconnected
+            // Reinitialize connection
+            _device.OpenDevice();
+
+            // Update UI
+            //UpdateConnectionStatus(true);
+
+            // Log the event
+            //Log("Device attached");
+
+            // Start receiving data
+            _device.ReadReport(OnReportReceived);
         }
 
         private void DeviceRemovedHandler()
         {
-            // Logic for when the device is disconnected
+            // Cleanup resources
+            _device.CloseDevice();
+
+            // Update UI
+            //UpdateConnectionStatus(false);
+
+            // Log the event
+            //Log("Device removed");
+
+            // Handle application-specific logic
+            //PauseOperations();
         }
     }
 }
